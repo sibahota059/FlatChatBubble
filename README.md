@@ -26,6 +26,7 @@ https://www.youtube.com/watch?v=AOC-L2TuuHs
 3. Support for group messages
 4. Timestamps
 5. Avatars
+6. Long press to Copy / Delet / Forward
 
 
 ### How To Contribute
