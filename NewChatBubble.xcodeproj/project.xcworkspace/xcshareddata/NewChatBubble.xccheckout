@@ -10,31 +10,31 @@
 	<string>NewChatBubble</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>206EDE4C7116B3C9569E3F15BA9770423823C78B</key>
-		<string>https://bitbucket.org/sibaprasad/newchatbubble.git</string>
+		<key>5DE416F49F600D7E85E58D0F8FDA4E1C0021D952</key>
+		<string>https://github.com/sibahota059/FlatChatBubble.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>NewChatBubble/NewChatBubble.xcodeproj</string>
+	<string>NewChatBubble.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>206EDE4C7116B3C9569E3F15BA9770423823C78B</key>
-		<string>../../..</string>
+		<key>5DE416F49F600D7E85E58D0F8FDA4E1C0021D952</key>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://bitbucket.org/sibaprasad/newchatbubble.git</string>
+	<string>https://github.com/sibahota059/FlatChatBubble.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>206EDE4C7116B3C9569E3F15BA9770423823C78B</string>
+	<string>5DE416F49F600D7E85E58D0F8FDA4E1C0021D952</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>206EDE4C7116B3C9569E3F15BA9770423823C78B</string>
+			<string>5DE416F49F600D7E85E58D0F8FDA4E1C0021D952</string>
 			<key>IDESourceControlWCCName</key>
-			<string>newchatbubble</string>
+			<string>FlatChatBubble</string>
 		</dict>
 	</array>
 </dict>

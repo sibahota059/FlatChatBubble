@@ -12,7 +12,7 @@
 #import "Constantvalues.h"
 #import "SPH_PARAM_List.h"
 
-@interface ViewController ()
+@interface ViewController ()<TextCellDelegate,MediaCellDelegate>
 {
     NSMutableArray *sphBubbledata;
     BOOL isfromMe;
@@ -93,7 +93,9 @@
         }
         cell.bubbletype=([feed_data.chat_media_type isEqualToString:kTextByme])?@"LEFT":@"RIGHT";
         cell.textLabel.text = feed_data.chat_message;
+        cell.textLabel.tag=indexPath.row;
         cell.timestampLabel.text = @"02:20 AM";
+        cell.CustomDelegate=self;
         cell.AvatarImageView.image=([feed_data.chat_media_type isEqualToString:kTextByme])?[UIImage imageNamed:@"ProfilePic"]:[UIImage imageNamed:@"person"];
         return cell;
 
@@ -106,15 +108,76 @@
     }
     cell.bubbletype=([feed_data.chat_media_type isEqualToString:kImagebyme])?@"LEFT":@"RIGHT";
     cell.textLabel.text = feed_data.chat_message;
+    cell.messageImageView.tag=indexPath.row;
+    cell.CustomDelegate=self;
     cell.timestampLabel.text = @"02:20 AM";
-     cell.AvatarImageView.image=([feed_data.chat_media_type isEqualToString:kImagebyme])?[UIImage imageNamed:@"ProfilePic"]:[UIImage imageNamed:@"person"];
+    cell.AvatarImageView.image=([feed_data.chat_media_type isEqualToString:kImagebyme])?[UIImage imageNamed:@"ProfilePic"]:[UIImage imageNamed:@"person"];
     
     return cell;
 }
 
 
+
+//=========***************************************************=============
+#pragma mark - CELL CLICKED  PROCEDURE
+//=========***************************************************=============
+
+
+-(void)textCellDidTapped:(SPHTextBubbleCell *)tesxtCell AndGesture:(UIGestureRecognizer*)tapGR;
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:tesxtCell.textLabel.tag inSection:0];
+    NSLog(@"Forward Pressed =%@ and IndexPath=%@",tesxtCell.textLabel.text,indexPath);
+    [tesxtCell showMenu];
+}
+// 7684097905
+
+-(void)cellCopyPressed:(SPHTextBubbleCell *)tesxtCell
+{
+    NSLog(@"copy Pressed =%@",tesxtCell.textLabel.text);
+    
+}
+
+-(void)cellForwardPressed:(SPHTextBubbleCell *)tesxtCell
+{
+    NSLog(@"Forward Pressed =%@",tesxtCell.textLabel.text);
+    
+}
+-(void)cellDeletePressed:(SPHTextBubbleCell *)tesxtCell
+{
+    NSLog(@"Delete Pressed =%@",tesxtCell.textLabel.text);
+    
+}
+
+//=========*******************  BELOW FUNCTIONS FOR IMAGE  **************************=============
+
+-(void)mediaCellDidTapped:(SPHMediaBubbleCell *)mediaCell AndGesture:(UIGestureRecognizer*)tapGR;
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:mediaCell.messageImageView.tag inSection:0];
+    NSLog(@"Media cell Pressed  and IndexPath=%@",indexPath);
+
+    [mediaCell showMenu];
+}
+
+-(void)mediaCellCopyPressed:(SPHMediaBubbleCell *)mediaCell
+{
+    NSLog(@"copy Pressed =%@",mediaCell.messageImageView.image);
+    
+}
+
+-(void)mediaCellForwardPressed:(SPHMediaBubbleCell *)mediaCell
+{
+    NSLog(@"Forward Pressed =%@",mediaCell.messageImageView.image);
+   
+}
+-(void)mediaCellDeletePressed:(SPHMediaBubbleCell *)mediaCell
+{
+    NSLog(@"Delete Pressed =%@",mediaCell.messageImageView.image);
+   
+}
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////******* KEYBOARD UPDOWN EVENT                      **************/////////////////
+#pragma mark               KEYBOARD UPDOWN EVENT
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 -(void)dismissKeyboard
@@ -168,7 +231,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////*******       SEND MESSAGE PRESSED                 **************/////////////////
+#pragma mark       SEND MESSAGE PRESSED   
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 - (IBAction)sendMessageNow:(id)sender
@@ -252,7 +315,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////******* GENERATE RANDOM ID to SAVE IN LOCAL **************/////////////////
+#pragma mark  GENERATE RANDOM ID to SAVE IN LOCAL
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -272,7 +335,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////******* SETUP DUMMY MESSAGE / REPLACE THEM IN LIVE **************/////////////////
+#pragma mark       SETUP DUMMY MESSAGE / REPLACE THEM IN LIVE
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 -(void)SetupDummyMessages

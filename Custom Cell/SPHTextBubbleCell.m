@@ -16,6 +16,9 @@
 
 @synthesize timestampLabel = _timestampLabel;
 
+
+// ***********************************================================================******************************//
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -52,12 +55,71 @@
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     
-
+        UILongPressGestureRecognizer *lpgr
+        = [[UILongPressGestureRecognizer alloc]
+           initWithTarget:self action:@selector(tapRecognized:)];
+        lpgr.minimumPressDuration = .4; //seconds
+        lpgr.delegate = self;
+        [self addGestureRecognizer:lpgr];
         
     }
     
     return self;
 }
+
+
+// ***********************************================================================******************************//
+// **********************| DELEGATE FUNCTIONS OF  CELL |****************************************************************************//
+// ***********************************================================================******************************//
+
+
+-(void)tapRecognized:(UITapGestureRecognizer *)tapGR
+{
+    [self.CustomDelegate textCellDidTapped:self AndGesture:tapGR];
+}
+
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
+{
+    if (action == @selector(copy:)|| action==@selector(forward:) || action==@selector(delete:)) {
+        return YES;
+    }
+    return NO;
+}
+- (IBAction)copy:(id)sender
+{
+    [self.CustomDelegate cellCopyPressed:self];
+}
+
+- (IBAction)forward:(id)sender
+{
+    [self.CustomDelegate cellForwardPressed:self];
+}
+
+- (IBAction)delete:(id)sender
+{
+    [self.CustomDelegate cellDeletePressed:self];
+}
+
+- (void)showMenu
+{
+    [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
+    [self becomeFirstResponder];
+    UIMenuItem *menuItem = [[UIMenuItem alloc] initWithTitle:@"Forward" action:@selector(forward:)];
+    [[UIMenuController sharedMenuController] setMenuItems:[NSArray arrayWithObjects:menuItem,nil]];
+    [[UIMenuController sharedMenuController] update];
+    CGRect textFrame=self.textLabel.frame; textFrame.origin.x-=50;
+    [[UIMenuController sharedMenuController] setTargetRect:textFrame inView:self];
+    [[UIMenuController sharedMenuController] setMenuVisible:YES animated:YES];
+    
+}
+
+// ***********************************================================================******************************//
+// **********************| LAYOUT CELL |****************************************************************************//
+// ***********************************================================================******************************//
+
 
 - (void)layoutSubviews
 {
@@ -103,6 +165,8 @@
     
 }
 
+// ***********************************================================================******************************//
+
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
     
@@ -119,6 +183,9 @@
     CGContextStrokePath(context);
     
 }
+
+// ***********************************================================================******************************//
+
 
 
 @end
